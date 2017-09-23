@@ -41,7 +41,7 @@
 	H.SVGRenderer.prototype.symbols.arrow = function (x, y, w, h) {
 		var p = 2;
 		return [
-			'M', x + p, y + p, 'L', x + w - p, y + h - p 
+			'M', x + p, y + p, 'L', x + w - p, y + h - p, 'l', 0, -6, 'l', 0, 6, 'l', -6, 0, 'l', 6, 0
 		];
 	};
 
@@ -134,8 +134,13 @@
 				yAxis = chart.yAxis[ann.options.yAxis],
 				dx = x - xAxis.toPixels(ann.options.xValue),
 				dy = y - yAxis.toPixels(ann.options.yValue);
-				
-			var path = ['M', 0, 0, 'L', parseInt(dx, 10), parseInt(dy, 10), 'L', parseInt(dx, 10)-4, parseInt(dy, 10), 'L', parseInt(dx, 10), parseInt(dy, 10), 'L', parseInt(dx, 10), parseInt(dy, 10)-2];
+			var theta = dy == 0 ? Math.PI/2:Math.atan(dx/dy);
+			var xa = 8 * Math.sin(theta - Math.PI/4);
+			var ya = 8 * Math.cos(theta - Math.PI/4);
+			//console.log([xa, ya, theta, dx, dy]);
+			var path = dy>0 ? 
+				['M', 0, 0, 'L', parseInt(dx, 10), parseInt(dy, 10), 'l', -xa, -ya, 'l', xa, ya, 'l', -ya, xa, 'l', ya, -xa]:
+				['M', 0, 0, 'L', parseInt(dx, 10), parseInt(dy, 10), 'l', xa, ya, 'l', -xa, -ya, 'l', ya, -xa, 'l', -ya, xa];
 			ann.shape.attr({
 				d: path
 			});
@@ -307,7 +312,7 @@
 				fill: 'rgba(255,0,0,0.4)',
 				stroke: 'black'
 			}, {}, {
-				d: ['M', 0, 0, 'L', 10, 10, 'L', 10, 8, 'L', 10, 10, 'L', 10, 8],
+				d: ['M', 0, 0, 'L', 10, 10, 'l', -4, 0, 'l', 4, 0, 'l', 0, -4, 'l', 0, 4],
 				fill: 'rgba(255,0,0,0.4)',
 				stroke: 'black'
 			}],
