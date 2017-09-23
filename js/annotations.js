@@ -38,6 +38,13 @@
 		];
 	};
 
+	H.SVGRenderer.prototype.symbols.arrow = function (x, y, w, h) {
+		var p = 2;
+		return [
+			'M', x + p, y + p, 'L', x + w - p, y + h - p 
+		];
+	};
+
 	H.SVGRenderer.prototype.symbols.text = function (x, y, w, h) {
 		var p = 1;
 		return [
@@ -50,6 +57,7 @@
 	if (H.VMLRenderer) {
 		H.VMLRenderer.prototype.symbols.text = H.SVGRenderer.prototype.symbols.text;
 		H.VMLRenderer.prototype.symbols.line = H.SVGRenderer.prototype.symbols.line;
+		H.VMLRenderer.prototype.symbols.arrow = H.SVGRenderer.prototype.symbols.arrow;
 	}
 
 
@@ -246,8 +254,8 @@
 
 	function defatultMainOptions() {
 		var buttons = [],
-			shapes = ['circle', 'line', 'square', 'text'],
-			types = ['circle', 'path', 'rect', null],
+			shapes = ['circle', 'line', 'square', 'text', 'arrow'],
+			types = ['circle', 'path', 'rect', null, 'path'],
 			params = [{
 				r: 0,
 				fill: 'rgba(255,0,0,0.4)',
