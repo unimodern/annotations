@@ -124,7 +124,44 @@
 				
 			return path;
 		},
+		getPathArrow: function (e) {
+			var ann = this,
+				chart = ann.chart,
+				bbox = chart.container.getBoundingClientRect(),
+				x = e.clientX - bbox.left,
+				y = e.clientY - bbox.top,
+				xAxis = chart.xAxis[ann.options.xAxis],
+				yAxis = chart.yAxis[ann.options.yAxis],
+				dx = x - xAxis.toPixels(ann.options.xValue),
+				dy = y - yAxis.toPixels(ann.options.yValue);
+				
+			var path = ['M', 0, 0, 'L', parseInt(dx, 10), parseInt(dy, 10), 'L', parseInt(dx, 10)-4, parseInt(dy, 10), 'L', parseInt(dx, 10), parseInt(dy, 10), 'L', parseInt(dx, 10), parseInt(dy, 10)-2];
+			ann.shape.attr({
+				d: path
+			});
+				
+			return path;
+		},
 		getPathAndUpdate: function (e) {
+			var ann = this,
+				chart = ann.chart,
+				path = utils.getPath.call(ann, e),
+				xAxis = chart.xAxis[ann.options.xAxis],
+				yAxis = chart.yAxis[ann.options.yAxis],
+				x = xAxis.toValue(path[4] + xAxis.toPixels(ann.options.xValue)),
+				y = yAxis.toValue(path[5] + yAxis.toPixels(ann.options.yValue));
+				
+			this.update({
+				xValueEnd: x,
+				yValueEnd: y,
+				shape: {
+					params: {
+						d: path
+					}
+				}
+			});
+		},
+		getPathArrowAndUpdate: function (e) {
 			var ann = this,
 				chart = ann.chart,
 				path = utils.getPath.call(ann, e),
