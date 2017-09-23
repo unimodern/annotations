@@ -232,6 +232,7 @@
 				input = document.createElement('span'),
 				button;
 					
+			input.className = "text-input-annotations";
 			input.innerHTML = '<input type="text" class="annotation-' + index + '" placeholder="Add text"><button class=""> Done </button>';
 			input.style.position = 'absolute';
 			input.style.left = e.pageX + 'px';
