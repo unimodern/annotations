@@ -269,9 +269,13 @@
 				height: 10,
 				fill: 'rgba(255,0,0,0.4)',
 				stroke: 'black'
+			}, {}, {
+				d: ['M', 0, 0, 'L', 10, 10, 'L', 10, 8, 'L', 10, 10, 'L', 10, 8],
+				fill: 'rgba(255,0,0,0.4)',
+				stroke: 'black'
 			}],
-			steps = [utils.getRadius, utils.getPath, utils.getRect, utils.getText],
-			stops = [utils.getRadiusAndUpdate, utils.getPathAndUpdate, utils.getRectAndUpdate, utils.showInput];
+			steps = [utils.getRadius, utils.getPath, utils.getRect, utils.getText, utils.getPath],
+			stops = [utils.getRadiusAndUpdate, utils.getPathAndUpdate, utils.getRectAndUpdate, utils.showInput, utils.getPathAndUpdate];
 			
 		each(shapes, function (s, i) {
 			buttons.push({
