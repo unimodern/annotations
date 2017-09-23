@@ -164,7 +164,7 @@
 		getPathArrowAndUpdate: function (e) {
 			var ann = this,
 				chart = ann.chart,
-				path = utils.getPath.call(ann, e),
+				path = utils.getPathArrow.call(ann, e),
 				xAxis = chart.xAxis[ann.options.xAxis],
 				yAxis = chart.yAxis[ann.options.yAxis],
 				x = xAxis.toValue(path[4] + xAxis.toPixels(ann.options.xValue)),
@@ -311,8 +311,8 @@
 				fill: 'rgba(255,0,0,0.4)',
 				stroke: 'black'
 			}],
-			steps = [utils.getRadius, utils.getPath, utils.getRect, utils.getText, utils.getPath],
-			stops = [utils.getRadiusAndUpdate, utils.getPathAndUpdate, utils.getRectAndUpdate, utils.showInput, utils.getPathAndUpdate];
+			steps = [utils.getRadius, utils.getPath, utils.getRect, utils.getText, utils.getPathArrow],
+			stops = [utils.getRadiusAndUpdate, utils.getPathAndUpdate, utils.getRectAndUpdate, utils.showInput, utils.getPathArrowAndUpdate];
 			
 		each(shapes, function (s, i) {
 			buttons.push({
