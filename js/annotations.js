@@ -135,10 +135,10 @@
 				dx = x - xAxis.toPixels(ann.options.xValue),
 				dy = y - yAxis.toPixels(ann.options.yValue);
 			var theta = dy == 0 ? Math.PI/2:Math.atan(dx/dy);
-			var xa = 8 * Math.sin(theta - Math.PI/4);
-			var ya = 8 * Math.cos(theta - Math.PI/4);
+			var xa = parseInt(8 * Math.sin(theta - Math.PI/4), 10);
+			var ya = parseInt(8 * Math.cos(theta - Math.PI/4), 10);
 			//console.log([xa, ya, theta, dx, dy]);
-			var path = dy>0 ? 
+			var path = dy > 0 ? 
 				['M', 0, 0, 'L', parseInt(dx, 10), parseInt(dy, 10), 'l', -xa, -ya, 'l', xa, ya, 'l', -ya, xa, 'l', ya, -xa]:
 				['M', 0, 0, 'L', parseInt(dx, 10), parseInt(dy, 10), 'l', xa, ya, 'l', -xa, -ya, 'l', ya, -xa, 'l', -ya, xa];
 			ann.shape.attr({
